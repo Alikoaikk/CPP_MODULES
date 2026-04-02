@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akoaik <akoaik@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/19 16:10:57 by akoaik            #+#    #+#             */
+/*   Updated: 2026/02/20 21:18:00 by akoaik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef WHATEVER_HPP
+# define WHATEVER_HPP
+
+template <typename T>
+void swap(T &a, T &b)
+{
+	T tmp = a;
+	a = b;
+	b = tmp;
+}
+
+template <typename T>
+T min(T const &a, T const &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+template <typename T>
+T max(T const &a, T const &b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+#endif
