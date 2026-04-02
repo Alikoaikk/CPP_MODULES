@@ -1,190 +1,178 @@
-# C++ Modules — 42
+# C++ Modules — 42 | akoaik
 
-*All projects created as part of the 42 curriculum by akoaik.*
-
-A series of C++ projects covering core and advanced C++98 concepts, from object-oriented fundamentals to STL containers and algorithms.
-
----
-
-## Modules Overview
-
-| Module | Topic |
-|--------|-------|
-| [CPP00](#cpp00) | Namespaces, classes, member functions, stdio streams |
-| [CPP01](#cpp01) | Memory allocation, references, pointers to members, switch |
-| [CPP02](#cpp02) | Ad-hoc polymorphism, operator overloading, Orthodox Canonical Form |
-| [CPP03](#cpp03) | Inheritance |
-| [CPP04](#cpp04) | Polymorphism, abstract classes, interfaces |
-| [CPP05](#cpp05) | Exception handling, abstract classes |
-| [CPP06](#cpp06) | C++ type casting |
-| [CPP07](#cpp07) | C++ templates |
-| [CPP08](#cpp08) | Templated containers, iterators, algorithms (STL) |
-| [CPP09](#cpp09) | STL containers and algorithms applied to real problems |
+A 10-module journey through C++ from the ground up — written entirely in C++98.
+Each module builds on the last, introducing one major concept at a time.
 
 ---
 
-## CPP00
+## The Learning Path
 
-**Topics:** Namespaces, classes, member functions, stdio streams, initialization lists, static, const.
-
-- **ex00** — `megaphone`: A simple program that uppercases its arguments.
-- **ex01** — `PhoneBook`: A basic phonebook with Add/Search/Display using classes.
-
-```bash
-cd CPP00/ex00 && make && ./megaphone
-cd CPP00/ex01 && make && ./PhoneBook
+```
+CPP00 → CPP01 → CPP02 → CPP03 → CPP04 → CPP05 → CPP06 → CPP07 → CPP08 → CPP09
+ OOP     Memory   OCF    Inherit  Poly   Exceptions Casts  Templates  STL   STL Applied
 ```
 
 ---
 
-## CPP01
+## CPP00 — First Steps into OOP
 
-**Topics:** Memory allocation (`new`/`delete`), pointers to members, references, switch statements.
+**The question:** How do you go from C to C++?
 
-- **ex00** — `Zombie`: Stack vs heap allocation.
-- **ex01** — `ZombieHorde`: Array allocation with `new[]`.
-- **ex02** — References vs pointers.
-- **ex03** — `HumanA/B`: Weapon held by reference vs pointer.
-- **ex04** — File read/replace utility.
-- **ex05** — `Harl`: Logging levels with pointers to member functions.
+The first time writing actual C++ — classes, member functions, `std::string`, `std::cin/cout`. Nothing fancy, just learning to think in objects.
 
-```bash
-cd CPP01/ex00 && make
-```
+- Built a `megaphone` program (uppercase args) — getting familiar with `std::` and basic I/O
+- Built a `PhoneBook` — my first real class with private data, public methods, and a loop-driven menu
+
+**What I learned:** How classes work, what `private`/`public` mean in practice, and why `std::string` is better than `char *`.
 
 ---
 
-## CPP02
+## CPP01 — Memory, Pointers, and References
 
-**Topics:** Ad-hoc polymorphism, operator overloading, Orthodox Canonical Form (OCF), fixed-point numbers.
+**The question:** Where does an object live, and how do you point to it?
 
-- **ex00** — `Fixed`: Fixed-point number class with OCF.
-- **ex01** — Operator overloads for arithmetic and comparison.
-- **ex02** — Full operator overloading and static min/max functions.
+This module forced me to understand the difference between stack and heap allocation, and when to use a reference vs a pointer.
 
-```bash
-cd CPP02/ex00 && make
-```
+- `Zombie` on the heap (`new`/`delete`) vs on the stack — and why it matters for lifetime
+- `ZombieHorde` — allocating an array of objects with `new[]`
+- `HumanA` holds a `Weapon&` (always has one), `HumanB` holds a `Weapon*` (might not) — the clearest possible lesson on references vs pointers
+- `Harl` — using **pointers to member functions** to dispatch log levels, avoiding a big if/else chain
 
----
-
-## CPP03
-
-**Topics:** Inheritance, constructor chaining, access specifiers.
-
-- **ex00** — `ClapTrap`: Base robot class.
-- **ex01** — `ScavTrap`: Inherits from ClapTrap.
-- **ex02** — `FragTrap`: Inherits from ClapTrap alongside ScavTrap.
-
-```bash
-cd CPP03/ex00 && make
-```
+**What I learned:** Stack vs heap, `new`/`delete`, references vs pointers, and that member function pointers exist.
 
 ---
 
-## CPP04
+## CPP02 — Operator Overloading and Orthodox Canonical Form
 
-**Topics:** Polymorphism, abstract classes, interfaces, virtual functions, deep copy.
+**The question:** How do you make a class behave like a built-in type?
 
-- **ex00** — `Animal`, `Dog`, `Cat`: Basic inheritance and polymorphism with virtual functions.
-- **ex01** — `Brain`: Deep copy with proper memory management.
-- **ex02** — Abstract `Animal` class (non-instantiable).
+Built a fixed-point number class from scratch across three exercises, adding more operators each time.
 
-```bash
-cd CPP04/ex00 && make && ./animal
-cd CPP04/ex01 && make && ./brain
-cd CPP04/ex02 && make && ./animal
-```
+- **OCF** — every class needs: default constructor, copy constructor, copy assignment operator, destructor
+- Overloaded `+`, `-`, `*`, `/`, `<<`, and all comparison operators
+- Learned that when you write `a = b`, C++ calls `operator=` — and if you don't define it, it does a shallow copy
+
+**What I learned:** The Orthodox Canonical Form, how operator overloading works, and fixed-point arithmetic as a real-world use case.
 
 ---
 
-## CPP05
+## CPP03 — Inheritance
 
-**Topics:** Exception handling, abstract classes, factory pattern.
+**The question:** How does one class build on another?
 
-- **Bureaucrat** — Name and grade (1–150), throws exceptions on invalid grades.
-- **AForm** — Abstract base for all forms.
-- **ShrubberyCreationForm / RobotomyRequestForm / PresidentialPardonForm** — Concrete forms with grade requirements.
-- **Intern** — Creates forms by name (Factory pattern).
+Constructed a chain of robot classes: `ClapTrap` → `ScavTrap` → `FragTrap`. Each child inherits attributes and can override or add behavior.
 
-```bash
-make -C CPP05/ex00   # ex00–ex03
-./CPP05/ex00/Bureaucrat
-```
+- Constructor/destructor chaining — watching the order they fire
+- Calling parent methods with `ClapTrap::attack()`
+- Hit points, energy points, and attack damage pass down through the hierarchy
+
+**What I learned:** How inheritance works in C++, constructor/destructor order, access specifiers in a hierarchy, and what `protected` is actually for.
 
 ---
 
-## CPP06
+## CPP04 — Polymorphism and Abstract Classes
 
-**Topics:** C++ type casting — `static_cast`, `dynamic_cast`, `reinterpret_cast`.
+**The question:** How do you treat different objects the same way through a common interface?
 
-- **ex00** — Scalar type conversion using `static_cast`.
-- **ex01** — Serialization/deserialization using `reinterpret_cast`.
-- **ex02** — Identifying real types using `dynamic_cast`.
+The biggest conceptual leap so far. Added `virtual` to functions and suddenly a pointer to `Animal` could call `Dog`'s sound.
 
-```bash
-cd CPP06/ex00 && make && ./convert "42.0f"
-```
+- `virtual` keyword — enables runtime dispatch (vtable)
+- `Animal* a = new Dog()` — the pointer type is `Animal`, but the right `makeSound()` gets called
+- `Brain` class — forced deep copy, understanding why shallow copy breaks when members are pointers
+- Pure virtual functions (`= 0`) — making `Animal` abstract so you can't instantiate it directly
 
----
-
-## CPP07
-
-**Topics:** C++ templates — generic, type-independent code.
-
-- **ex00 — `whatever.hpp`**: `swap`, `min`, `max` function templates.
-- **ex01 — `iter.hpp`**: `iter(array, len, func)` applies a function to every element.
-- **ex02 — `Array.hpp`**: Generic array class with deep copy, `size()`, and bounds-checked `operator[]`.
-
-```bash
-cd CPP07/ex00 && make
-cd CPP07/ex01 && make
-cd CPP07/ex02 && make
-```
+**What I learned:** Virtual functions, vtables, polymorphism, abstract classes, interfaces, and why deep copy matters when your class owns heap memory.
 
 ---
 
-## CPP08
+## CPP05 — Exceptions
 
-**Topics:** Templated containers, iterators, algorithms (STL).
+**The question:** How do you handle errors without returning error codes everywhere?
 
-- **ex00 — `easyfind`**: Template function that searches for a value in any integer container.
-- **ex01 — `Span`**: Stores up to N integers, computes shortest/longest span.
-- **ex02 — `MutantStack`**: `std::stack` extension with iterator support.
+Built a bureaucracy simulator where `Bureaucrat` objects sign `Form` objects — and everything can fail.
 
-```bash
-cd CPP08/ex00 && make && ./easyfind
-cd CPP08/ex01 && make && ./span
-cd CPP08/ex02 && make && ./mutantstack
-```
+- `throw`, `try`, `catch` — the C++ exception mechanism
+- Custom exception classes inheriting from `std::exception`
+- `AForm` as an abstract base class — concrete forms (`ShrubberyCreationForm`, `RobotomyRequestForm`, `PresidentialPardonForm`) implement the execution logic
+- `Intern` creates forms by name — my first use of the **Factory pattern**
 
----
-
-## CPP09
-
-**Topics:** STL containers and algorithms applied to real problems.
-
-- **ex00 — Bitcoin Exchange**: Reads a CSV price database and evaluates BTC values using `std::map`.
-- **ex01 — Reverse Polish Notation**: Evaluates RPN expressions using `std::stack`.
-- **ex02 — PmergeMe**: Sorts integers using the **Ford-Johnson (merge-insertion sort)** algorithm with both `std::vector` and `std::deque`.
-
-```bash
-cd CPP09/ex00 && make && ./btc input.txt
-cd CPP09/ex01 && make && ./RPN "3 5 8 * 7 - +"
-cd CPP09/ex02 && make && ./PmergeMe 3 5 9 7 4
-```
+**What I learned:** Exception handling, writing custom exception types, abstract base classes in a real hierarchy, and the Factory design pattern.
 
 ---
 
-## Requirements
+## CPP06 — Type Casting
 
-- C++98 compatible compiler (`g++` with `-std=c++98`)
-- `make`
+**The question:** How do C++ casts actually work — and when do you use which one?
+
+Three exercises, each targeting a different cast operator.
+
+- `static_cast` — scalar type conversion (int → float → char), with edge cases like `nan` and `inf`
+- `reinterpret_cast` — treating a pointer as a raw integer (serialization) and back
+- `dynamic_cast` — identifying the real runtime type of a polymorphic object
+
+**What I learned:** C++ has 4 cast operators for a reason. Each one communicates intent and catches different mistakes at compile or runtime. Never use C-style casts in C++.
 
 ---
 
-## Resources
+## CPP07 — Templates
 
-- [cppreference.com](https://en.cppreference.com/)
-- [LearnCpp](https://www.learncpp.com/)
-- [42 Intra — C++ Modules](https://projects.intra.42.fr/)
+**The question:** How do you write code that works for any type?
+
+First contact with C++ templates — generic functions and classes that the compiler specializes per type.
+
+- `swap`, `min`, `max` as function templates — work on any comparable type
+- `iter` — a generic function that applies any function to every element of any array
+- `Array<T>` — a generic class with bounds-checked `operator[]` that throws on out-of-range access
+
+**What I learned:** How function and class templates work, template instantiation, why template code lives in `.hpp` files, and how to write generic but type-safe code.
+
+---
+
+## CPP08 — STL Containers and Iterators
+
+**The question:** How does the Standard Template Library actually work?
+
+Moved from writing generic code to using the STL properly — containers, iterators, algorithms.
+
+- `easyfind` — a template function using `std::find` to search any integer container; throws if not found
+- `Span` — a class storing up to N integers with `shortestSpan()` and `longestSpan()` using `std::min_element` / `std::max_element`
+- `MutantStack` — extended `std::stack` to expose iterators (stack normally hides them)
+
+**What I learned:** How STL containers and iterators work under the hood, how to use `<algorithm>`, and how to extend existing STL classes.
+
+---
+
+## CPP09 — STL Applied to Real Problems
+
+**The question:** Can you choose the right container for the job?
+
+The hardest module — three independent problems, each requiring a different STL container and algorithm.
+
+- **Bitcoin Exchange** — parse a CSV price database, evaluate a list of inputs, output BTC values. Uses `std::map` for O(log n) date lookups with `lower_bound`
+- **Reverse Polish Notation** — evaluate RPN expressions (`3 5 8 * 7 - +`). Uses `std::stack` naturally
+- **PmergeMe** — sort a sequence using the **Ford-Johnson algorithm** (merge-insertion sort), which minimizes comparisons. Implemented with both `std::vector` and `std::deque`, using Jacobsthal-ordered insertion and bounded binary search
+
+**What I learned:** How to pick the right container (`map`, `stack`, `vector`, `deque`), how iterators differ between containers, and what algorithmic complexity looks like in practice. Ford-Johnson was the most complex algorithm I implemented.
+
+---
+
+## Overall Takeaways
+
+| Concept | Where it clicked |
+|---|---|
+| Classes and OOP | CPP00 |
+| Memory management | CPP01 |
+| Operator overloading | CPP02 |
+| Inheritance | CPP03 |
+| Polymorphism | CPP04 |
+| Exception handling | CPP05 |
+| Type system and casts | CPP06 |
+| Generic programming | CPP07 |
+| STL internals | CPP08 |
+| Algorithm design | CPP09 |
+
+Going through these modules, C++ stopped feeling like "C with classes" and started making sense as a language with a consistent design philosophy — one where you control everything, and the type system helps you do it safely.
+
+---
+
+*42 Network — C++ Modules | C++98*
