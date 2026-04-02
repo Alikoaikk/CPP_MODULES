@@ -1,5 +1,7 @@
 # C++ Modules — 42 | akoaik
 
+![C++ Modules Banner](assets/banner.png)
+
 A 10-module journey through C++ from the ground up — written entirely in C++98.
 Each module builds on the last, introducing one major concept at a time.
 
